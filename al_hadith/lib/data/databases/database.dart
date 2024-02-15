@@ -130,8 +130,12 @@ class AppDatabase extends _$AppDatabase {
   // Define methods to interact with the database
   Future<List<Books>> getAllBooks() => select(booksTable).get();
   Future<List<Chapter>> getAllChapters() => select(chapterTable).get();
+
+  Future<List<Chapter>> getChaptersByBookId(int id) => (select(chapterTable)..where((tbl) => tbl.book_id.equals(id))).get();
   Future<List<Hadith>> getAllHadiths() => select(hadithTable).get();
   Future<List<Section>> getAllSections() => select(sectionTable).get();
+
+
 }
 
 

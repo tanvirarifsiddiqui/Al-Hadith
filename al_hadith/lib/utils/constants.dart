@@ -10,6 +10,7 @@ class AppConstants {
   // Colors
   static const Color primaryColor = Color(0xFF118C6D);
   static const Color secondaryColor = Color(0xFF4CAF50);
+  static const Color thirdColor = Color(0xFF44D2B9);
   static const Color backgroundColor = Color(0xFFF5F5F5);
 
   // Text Styles
