@@ -4,7 +4,7 @@ part of 'database.dart';
 
 // ignore_for_file: type=lint
 class $BooksTableTable extends BooksTable
-    with TableInfo<$BooksTableTable, Book> {
+    with TableInfo<$BooksTableTable, Books> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -74,9 +74,9 @@ class $BooksTableTable extends BooksTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'books_table';
+  static const String $name = 'books';
   @override
-  VerificationContext validateIntegrity(Insertable<Book> instance,
+  VerificationContext validateIntegrity(Insertable<Books> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -137,9 +137,9 @@ class $BooksTableTable extends BooksTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Book map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Books map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Book(
+    return Books(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       title: attachedDatabase.typeMapping
@@ -165,7 +165,7 @@ class $BooksTableTable extends BooksTable
   }
 }
 
-class Book extends DataClass implements Insertable<Book> {
+class Books extends DataClass implements Insertable<Books> {
   final int id;
   final String title;
   final String title_ar;
@@ -174,7 +174,7 @@ class Book extends DataClass implements Insertable<Book> {
   final String book_name;
   final String book_descr;
   final String color_code;
-  const Book(
+  const Books(
       {required this.id,
       required this.title,
       required this.title_ar,
@@ -210,10 +210,10 @@ class Book extends DataClass implements Insertable<Book> {
     );
   }
 
-  factory Book.fromJson(Map<String, dynamic> json,
+  factory Books.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Book(
+    return Books(
       id: serializer.fromJson<int>(json['id']),
       title: serializer.fromJson<String>(json['title']),
       title_ar: serializer.fromJson<String>(json['title_ar']),
@@ -239,7 +239,7 @@ class Book extends DataClass implements Insertable<Book> {
     };
   }
 
-  Book copyWith(
+  Books copyWith(
           {int? id,
           String? title,
           String? title_ar,
@@ -248,7 +248,7 @@ class Book extends DataClass implements Insertable<Book> {
           String? book_name,
           String? book_descr,
           String? color_code}) =>
-      Book(
+      Books(
         id: id ?? this.id,
         title: title ?? this.title,
         title_ar: title_ar ?? this.title_ar,
@@ -279,7 +279,7 @@ class Book extends DataClass implements Insertable<Book> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Book &&
+      (other is Books &&
           other.id == this.id &&
           other.title == this.title &&
           other.title_ar == this.title_ar &&
@@ -290,7 +290,7 @@ class Book extends DataClass implements Insertable<Book> {
           other.color_code == this.color_code);
 }
 
-class BooksTableCompanion extends UpdateCompanion<Book> {
+class BooksTableCompanion extends UpdateCompanion<Books> {
   final Value<int> id;
   final Value<String> title;
   final Value<String> title_ar;
@@ -325,7 +325,7 @@ class BooksTableCompanion extends UpdateCompanion<Book> {
         book_name = Value(book_name),
         book_descr = Value(book_descr),
         color_code = Value(color_code);
-  static Insertable<Book> custom({
+  static Insertable<Books> custom({
     Expression<int>? id,
     Expression<String>? title,
     Expression<String>? title_ar,
@@ -470,7 +470,7 @@ class $ChapterTableTable extends ChapterTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'chapter_table';
+  static const String $name = 'chapter';
   @override
   VerificationContext validateIntegrity(Insertable<Chapter> instance,
       {bool isInserting = false}) {
@@ -875,7 +875,7 @@ class $HadithTableTable extends HadithTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'hadith_table';
+  static const String $name = 'hadith';
   @override
   VerificationContext validateIntegrity(Insertable<Hadith> instance,
       {bool isInserting = false}) {
@@ -1412,7 +1412,7 @@ class $SectionTableTable extends SectionTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'section_table';
+  static const String $name = 'section';
   @override
   VerificationContext validateIntegrity(Insertable<Section> instance,
       {bool isInserting = false}) {

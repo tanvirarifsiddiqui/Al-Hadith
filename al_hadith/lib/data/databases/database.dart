@@ -31,7 +31,7 @@ class BooksTable extends Table {
 class ChapterTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get chapter_id => integer()();
-  IntColumn get book_id => integer().references(Book, #id)();
+  IntColumn get book_id => integer().references(Books, #id)();
   TextColumn get title => text()();
   IntColumn get number => integer()();
   TextColumn get hadis_range => text()();
@@ -81,7 +81,7 @@ LazyDatabase _openConnection() {
     // put the database file, called db.sqlite here, into the documents folder
     // for your app.
     final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    final file = File(p.join(dbFolder.path, 'hadith_bn_test.sqlite'));
 
     if (!await file.exists()) {
       // Extract the pre-populated database file from assets
@@ -128,7 +128,7 @@ class AppDatabase extends _$AppDatabase {
 
 
   // Define methods to interact with the database
-  Future<List<Book>> getAllBooks() => select(booksTable).get();
+  Future<List<Books>> getAllBooks() => select(booksTable).get();
   Future<List<Chapter>> getAllChapters() => select(chapterTable).get();
   Future<List<Hadith>> getAllHadiths() => select(hadithTable).get();
   Future<List<Section>> getAllSections() => select(sectionTable).get();

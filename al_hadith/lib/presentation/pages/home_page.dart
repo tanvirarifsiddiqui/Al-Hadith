@@ -32,7 +32,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late AppDatabase _database;
   bool _isLoading = true;
-  List<Book> _books = [];
+  List<Books> _books = [];
 
   @override
   void initState() {
