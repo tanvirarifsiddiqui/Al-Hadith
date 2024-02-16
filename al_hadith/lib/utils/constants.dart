@@ -14,17 +14,15 @@ class AppConstants {
   static const Color backgroundColor = Color(0xFFF5F5F5);
 
   // Text Styles
-  static const TextStyle headingTextStyle = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
+  static const TextStyle arTextStyle = TextStyle(
+    fontSize: 22,
     color: Colors.black,
-    fontFamily: 'ArabicFont', // todo Replace with your Arabic font
+    // fontFamily: 'ArabicFont', // todo Replace with your Arabic font
   );
 
-  static const TextStyle bodyTextStyle = TextStyle(
-    fontSize: 16,
-    color: Colors.grey,
-    fontFamily: 'BengaliFont', // todo Replace with your Bengali font
+  static const TextStyle bnTextStyle = TextStyle(
+    fontSize: 17,
+    // fontFamily: 'BengaliFont', // todo Replace with your Bengali font
   );
 
   // Other Constants
