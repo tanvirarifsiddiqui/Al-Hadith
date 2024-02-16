@@ -1,3 +1,4 @@
+import 'package:al_hadith/database_initialization.dart';
 import 'package:al_hadith/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,6 @@ class HadithPage extends StatefulWidget {
 }
 
 class _HadithPageState extends State<HadithPage> {
-  late AppDatabase _database;
   bool _isLoading = true;
   List<Hadith> _hadiths = [];
   List<Section> _sections = [];
@@ -31,13 +31,13 @@ class _HadithPageState extends State<HadithPage> {
   @override
   void initState() {
     super.initState();
-    _initDatabase();
+    _loadHadiths();
   }
 
-  Future<void> _initDatabase() async {
-    _database = AppDatabase();
+  Future<void> _loadHadiths() async {
+    final _database = DatabaseManager.databaseInstance;
 
-    final sections = await _database.getSectionByBookIdAndChapterId(
+    final sections = await _database!.getSectionByBookIdAndChapterId(
         widget.bookId, widget.chapterId);
     final hadiths = await _database.getHadithByBookAndChapterId(
         widget.bookId, widget.chapterId);

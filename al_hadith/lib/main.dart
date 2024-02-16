@@ -1,6 +1,7 @@
-import 'package:al_hadith/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:al_hadith/presentation/pages/home_page.dart';
+import 'database_initialization.dart'; // Importing DatabaseManager
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(context);
+    DatabaseManager.initDatabase(); // Initialize the database when the app starts
+
     return GetMaterialApp(
       debugShowMaterialGrid: false,
       title:"ST Courier",

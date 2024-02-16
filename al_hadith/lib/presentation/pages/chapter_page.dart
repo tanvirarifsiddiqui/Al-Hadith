@@ -3,6 +3,7 @@ import 'package:al_hadith/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/databases/database.dart';
+import '../../database_initialization.dart';
 
 class ChapterPage extends StatefulWidget {
   final int bookId;
@@ -21,7 +22,6 @@ class ChapterPage extends StatefulWidget {
 }
 
 class _ChapterPageState extends State<ChapterPage> {
-  late AppDatabase _database;
   bool _isLoading = true;
   List<Chapter> _chapters = [];
   List<Chapter> _filteredChapters = []; // Add a list to store filtered chapters
@@ -30,16 +30,16 @@ class _ChapterPageState extends State<ChapterPage> {
   @override
   void initState() {
     super.initState();
-    _initDatabase();
+    _loadChapters();
   }
 
-  Future<void> _initDatabase() async {
-    _database = AppDatabase();
+  Future<void> _loadChapters() async {
+    final _database = DatabaseManager.databaseInstance;
+    final chapters = await _database!.getChaptersByBookId(widget.bookId);
 
-    final chapters = await _database.getChaptersByBookId(widget.bookId);
     setState(() {
       _chapters = chapters;
-      _filteredChapters = chapters; // Initialize filtered chapters with all chapters
+      _filteredChapters = chapters;
       _isLoading = false;
     });
   }

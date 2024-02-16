@@ -4,26 +4,27 @@ import 'package:flutter/material.dart';
 import '../../data/databases/database.dart';
 import 'package:get/get.dart';
 
+import '../../database_initialization.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late AppDatabase _database;
   bool _isLoading = true;
   List<Book> _books = [];
 
   @override
   void initState() {
     super.initState();
-    _initDatabase();
+    _loadBooks();
   }
 
-  Future<void> _initDatabase() async {
-    _database = AppDatabase();
+  Future<void> _loadBooks() async {
+    final _database = DatabaseManager.databaseInstance; // Access the database instance from the DatabaseManager
 
-    final books = await _database.getAllBooks();
+    final books = await _database!.getAllBooks(); // Ensure database is not null before accessing methods
     setState(() {
       _books = books;
       _isLoading = false;
