@@ -1,5 +1,7 @@
+import 'package:al_hadith/presentation/pages/hadith_page.dart';
 import 'package:al_hadith/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../data/databases/database.dart';
 
 class ChapterPage extends StatefulWidget {
@@ -44,8 +46,34 @@ class _ChapterPageState extends State<ChapterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text(widget.bookName)),
-        backgroundColor: AppConstants.secondaryColor,
+        automaticallyImplyLeading: false,
+        leading: Container(
+          padding: EdgeInsets.only(left: 16),
+          child: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+              size: 24,
+            ),
+          ),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.bookName,
+              style: TextStyle(color: Colors.white),
+            ),
+            Text(
+              '৭৫৬৩ টি হাদিস',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ],
+        ),
+        backgroundColor: AppConstants.primaryColor,
       ),
       body: Column(
         children: [
@@ -71,7 +99,9 @@ class _ChapterPageState extends State<ChapterPage> {
               itemBuilder: (context, index) {
                 final chapter = _filteredChapters[index];
                 return GestureDetector(
-                  // onTap: ,
+                  onTap: (){
+                    Get.to(()=>HadithPage(bookId: widget.bookId, chapterId: index+1, bookName: widget.bookName));
+                  },
                   child: Card(
                     elevation: 3,
                     color: AppConstants.thirdColor,
@@ -104,7 +134,7 @@ class _ChapterPageState extends State<ChapterPage> {
                                   chapter.title,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                   overflow: TextOverflow.ellipsis, // Define how to handle overflow
-                                  maxLines: 1, // Maximum number of lines to display
+                                  maxLines: 2, // Maximum number of lines to display
                                 ),
                                 Text(
                                   "হাদিসের রেঞ্জ: ${chapter.hadis_range}",

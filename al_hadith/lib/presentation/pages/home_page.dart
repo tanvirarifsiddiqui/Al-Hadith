@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late AppDatabase _database;
   bool _isLoading = true;
-  List<Books> _books = [];
+  List<Book> _books = [];
 
   @override
   void initState() {
@@ -68,8 +68,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('আল হাদিস')),
-        backgroundColor: AppConstants.secondaryColor,
+        title: Center(child: Text('আল হাদিস',style: TextStyle(color: Colors.white),)),
+        backgroundColor: AppConstants.primaryColor,
       ),
       body: _isLoading
           ? Center(child: LinearProgressIndicator())

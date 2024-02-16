@@ -31,7 +31,7 @@ class BooksTable extends Table {
 class ChapterTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get chapter_id => integer()();
-  IntColumn get book_id => integer().references(Books, #id)();
+  IntColumn get book_id => integer().references(Book, #id)();
   TextColumn get title => text()();
   IntColumn get number => integer()();
   TextColumn get hadis_range => text()();
@@ -55,6 +55,9 @@ class HadithTable extends Table {
   TextColumn get ar => text()();
   TextColumn get ar_diacless => text()();
   TextColumn get note => text()();
+  IntColumn get grade_id => integer()();
+  TextColumn get grade => text()();
+  TextColumn get grade_color => text()();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -64,12 +67,12 @@ class HadithTable extends Table {
 class SectionTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get book_id => integer()();
-  IntColumn get book_name => integer()();
+  TextColumn get book_name => text()();
   IntColumn get chapter_id => integer()();
   IntColumn get section_id => integer()();
   TextColumn get title => text()();
   TextColumn get preface => text()();
-  IntColumn get number => integer()();
+  TextColumn get number => text()(); //it is not an integer
   IntColumn get sort_order => integer()();
 
   @override
@@ -128,12 +131,30 @@ class AppDatabase extends _$AppDatabase {
 
 
   // Define methods to interact with the database
-  Future<List<Books>> getAllBooks() => select(booksTable).get();
-  Future<List<Chapter>> getAllChapters() => select(chapterTable).get();
+  Future<List<Book>> getAllBooks() async => select(booksTable).get();
+  Future<List<Chapter>> getAllChapters() async => select(chapterTable).get();
 
-  Future<List<Chapter>> getChaptersByBookId(int id) => (select(chapterTable)..where((tbl) => tbl.book_id.equals(id))).get();
-  Future<List<Hadith>> getAllHadiths() => select(hadithTable).get();
-  Future<List<Section>> getAllSections() => select(sectionTable).get();
+  //getting chapters by book id
+  Future<List<Chapter>> getChaptersByBookId(int id) async => (select(chapterTable)..where((tbl) => tbl.book_id.equals(id))).get();
+
+  //getting hadiths by book id and chapter id
+  Future<List<Hadith>> getHadithByBookAndChapterId(int bookId, int chapterId) async {
+    final query = select(hadithTable)
+      ..where((tbl) => tbl.book_id.equals(bookId) & tbl.chapter_id.equals(chapterId));
+
+    return query.get();
+  }
+
+  //getting sections by chapter id and book id
+  Future<List<Section>> getSectionByBookIdAndChapterId(int bookId, int chapterId) async {
+    final query = select(sectionTable)
+      ..where((tbl) => tbl.book_id.equals(bookId) & tbl.chapter_id.equals(chapterId));
+
+    return query.get();
+  }
+
+  // Future<List<Hadith>> getAllHadiths() => select(hadithTable).get();
+  // Future<List<Section>> getAllSections() => select(sectionTable).get();
 
 
 }
