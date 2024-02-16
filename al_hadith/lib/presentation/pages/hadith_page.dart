@@ -7,11 +7,13 @@ class HadithPage extends StatefulWidget {
   final int bookId;
   final int chapterId;
   final String bookName;
+  final String chapterName;
 
   const HadithPage({
     required this.bookId,
     required this.chapterId,
     required this.bookName,
+    required this.chapterName,
     Key? key,
   }) : super(key: key);
 
@@ -70,7 +72,7 @@ class _HadithPageState extends State<HadithPage> {
               style: TextStyle(color: Colors.white),
             ),
             Text(
-              '৭৫৬৩ টি হাদিস',
+              widget.chapterName,
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],

@@ -78,8 +78,13 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 final book = _books[index];
                 return GestureDetector(
-                  onTap: (){
-                    Get.to(()=>ChapterPage(bookId: index+1, bookName: book.title,));
+                  onTap: () async {
+                    String? hadithNumber = await _getHadithNumber(index);
+                    Get.to(()=>ChapterPage(
+                        bookId: index+1,
+                        bookName: book.title,
+                      hadithNumber: hadithNumber ?? 'Invalid Number',
+                    ));
                   },
                   child: Card(
                     elevation: 3,

@@ -7,10 +7,12 @@ import '../../data/databases/database.dart';
 class ChapterPage extends StatefulWidget {
   final int bookId;
   final String bookName;
+  final String hadithNumber;
 
   const ChapterPage({
     required this.bookId,
     required this.bookName,
+    required this.hadithNumber,
     Key? key,
   }) : super(key: key);
 
@@ -68,7 +70,7 @@ class _ChapterPageState extends State<ChapterPage> {
               style: TextStyle(color: Colors.white),
             ),
             Text(
-              '৭৫৬৩ টি হাদিস',
+              "${widget.hadithNumber} টি হাদিস",
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
@@ -100,7 +102,12 @@ class _ChapterPageState extends State<ChapterPage> {
                 final chapter = _filteredChapters[index];
                 return GestureDetector(
                   onTap: (){
-                    Get.to(()=>HadithPage(bookId: widget.bookId, chapterId: index+1, bookName: widget.bookName));
+                    Get.to(()=>HadithPage(
+                        bookId: widget.bookId,
+                        chapterId: chapter.id,
+                        bookName: widget.bookName,
+                      chapterName: chapter.title,
+                    ));
                   },
                   child: Card(
                     elevation: 3,
