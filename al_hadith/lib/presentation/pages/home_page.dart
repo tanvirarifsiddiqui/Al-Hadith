@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () async {
                     String? hadithNumber = await _getHadithNumber(index);
                     Get.to(()=>ChapterPage(
-                        bookId: index+1,
+                        bookId: book.id,
                         bookName: book.title,
                       hadithNumber: hadithNumber ?? 'Invalid Number',
                     ));
